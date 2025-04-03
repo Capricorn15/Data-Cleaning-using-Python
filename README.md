@@ -1,6 +1,6 @@
 # Data-Cleaning-using-Python
 
-![]()
+![](icon.png)
 
 ## Project Overview
 This project centers on data cleaning and anomaly detection for a customer dataset, to make it eligible for further analysis. The dataset contains customer information such as personal details, job industry, wealth segment, purchase history, and tenure.
@@ -79,3 +79,8 @@ print("Missing Values:\n", df.isnull().sum())
 ---
 ![](missing-value-check.PNG)
 ---
+### Handling Missing Data
+
+Columns | Issue | Solution Applied
+|-------|-------|-----------------|
+|last_name |Missing values |Filled with "Unknown" |
