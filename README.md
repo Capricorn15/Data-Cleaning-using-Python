@@ -56,3 +56,26 @@ Key columns include:
 **deceased_indicator** – Whether the customer is deceased (Yes/No)
 
 ## Data Cleaning Processes
+To begin with, the necessary libraries were imported to read the excel file from the directory into a dataframe on jupiter notebook. Then, data qualities were probed by checking datatypes and missing values.
+
+```
+# import  libraries
+import pandas as pd
+import numpy as np
+
+df = pd.read_excel(data.xlsx)
+
+# display the datatypes for each columns
+print("Datatypes:\n", df.dtypes)
+```
+---
+![](data-type.PNG)
+---
+```
+# Check for missing values
+print("Missing Values:\n", df.isnull().sum())
+
+```
+---
+![](missing-value-check.PNG)
+---
