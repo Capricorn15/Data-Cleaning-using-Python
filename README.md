@@ -84,3 +84,26 @@ print("Missing Values:\n", df.isnull().sum())
 Columns | Issue | Solution Applied
 |-------|-------|-----------------|
 |last_name |Missing values |Filled with "Unknown" |
+|job_title |Missing values |Filled with "Unknown" |
+|job_industry_category |Missing values |Imputed based on most common category per job title |
+|DOB |Missing values |Replaced with the median date of birth |
+|tenure |Missing values |Replaced with the median tenure |
+
+```
+# replace missing values in the text columns ("last_name", "job_title") with "Unknown"
+df.fillna({"last_name":"Unknown"}, inplace=True)
+df.fillna({"job_title":"Unknown"}, inplace=True)
+
+# Fill job_industry_category based on most common category per job_title
+job_industry_mode = df.groupby("job_title")["job_industry_category"].apply(lambda x: x.mode().iloc[0] if not x.mode().empty else "Unknown")
+df["job_industry_category"] = df.apply(lambda row: job_industry_mode[row["job_title"]] if pd.isna(row["job_industry_category"]) else row["job_industry_category"], axis=1)
+
+# Ensure correct date format and replace missing values with median DOB
+df["DOB"] = pd.to_datetime(df["DOB"], errors="coerce")
+median_dob = df["DOB"].median()  # Calculate median DOB
+df.fillna({"DOB":median_dob}, inplace = True)
+
+# Replace missing values with median tenure
+df.fillna({"tenure" : df["tenure"].median()}, inplace=True)
+```
+
