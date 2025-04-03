@@ -107,3 +107,30 @@ df.fillna({"DOB":median_dob}, inplace = True)
 df.fillna({"tenure" : df["tenure"].median()}, inplace=True)
 ```
 
+### Fixing Inconsistent Data
+
+```
+# Standardize gender values
+df["gender"] = df["gender"].str.strip().str.lower()  # Remove spaces & convert to lowercase
+df["gender"] = df["gender"].replace({
+    "m": "Male", "male": "Male",
+    "f": "Female", "female": "Female",
+    "femal": "Female", "u": "Unknown"
+})
+
+# Fix spelling error in the column ("job_industry_category")
+df["job_industry_category"].unique() # to display values prior to correction
+df["job_industry_category"] = df["job_industry_category"].replace({"Argiculture" : "Agriculture"})
+
+# Standardize boolean values in the columns ("owns_car", "deceased_indicator") 
+df["owns_car"] = df["owns_car"].str.strip().str.upper()
+df["owns_car"] = df["owns_car"].replace({"YES": "Yes", "NO": "No"})
+
+df["deceased_indicator"] = df["deceased_indicator"].str.strip().str.upper()
+df["deceased_indicator"] = df["deceased_indicator"].replace({"Y": "Yes", "N": "No"})
+
+# Remove irrelevant column
+df.drop("default", axis=1, inplace=True)
+
+df.head()
+```
