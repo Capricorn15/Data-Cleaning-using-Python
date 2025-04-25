@@ -20,7 +20,7 @@ Ensuring data quality for future use
 
 ### Tools
 
-- Pyhton, Jupiter NoteBook
+- Python, Jupiter NoteBook
 
 ## About Dataset
 The dataset contains information on customer demographics and transactions stored in a excel file, having the number of entries and columns stated below;
@@ -108,6 +108,12 @@ df.fillna({"tenure" : df["tenure"].median()}, inplace=True)
 ```
 
 ### Fixing Inconsistent Data
+
+- Standardized Gender Values: Inconsistencies in the gender column such as "M", "F", "femal", and "u" were standardized by converting all values to lowercase, trimming whitespaces, and then mapping them to the correct format
+
+- Fixed Spelling Errors:In the job_industry_category column, spelling inconsistencies detected and corrected. For instance, "Argiculture" was corrected to "Agriculture"
+
+- Standardized Boolean Values (owns_car, deceased_indicator): This was done by stripping leading/trailing spaces and capitalizing values to a consistent format.The owns_car and deceased_indicator columns had inconsistent capitalization and formatting (e.g., "YES", "no", "yes ") which were standardized to "Yes", "No" . 
 
 ```
 # Standardize gender values
