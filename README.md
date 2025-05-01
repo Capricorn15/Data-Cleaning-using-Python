@@ -165,3 +165,21 @@ for col in numerical_cols:
 
 ```
 The above code revealed **no extreme outliers** in the key numerical fields, which indicates that the dataset did not contain unusual or extreme values that could distort results.
+
+### Anomaly Detection
+This is aimed at identifying and addressing irregularities that could affect outcomes of further analysis, which involved checking for duplicate records and dropping irrelevant columns from the dataset.
+
+**Duplicate Records:** The unique "customer_id" field was checked for duplicate entries to ensure no customer was recorded multiple times in the dataset. It revealed no duplicate records, confirming the dataset's uniqueness at the entity level
+
+```
+# Find duplicate customer records based on "customer_id"
+duplicates = df[df.duplicated(subset=["customer_id"], keep=False)]
+print(f"Duplicate customer records found: {len(duplicates)}")
+
+```
+**Irrelevant Column:** Upon reviewing the dataset for columns that were irrelevant or contained insufficient information. Hence, the "default" column was dropped from the dataset.
+
+```
+# Remove irrelevant column
+df.drop("default", axis=1, inplace=True)
+```
