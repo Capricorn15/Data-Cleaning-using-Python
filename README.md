@@ -140,3 +140,28 @@ df.drop("default", axis=1, inplace=True)
 
 df.head()
 ```
+### Detection and Handling of Outliers
+It is a pertinent step in data cleaning to look out for outliers in a dataset as this detection allows us to check for values that fall significantly outside the typical range of data. Using **Interquartile Range (IQR) method**, outlier detection was performed on the dataset's numerical columns.
+
+```
+# List of numerical columns to check for outliers
+numerical_cols = ["past_3_years_bike_related_purchases", "tenure"]
+
+# Function to detect outliers using IQR
+def detect_outliers(df, column):
+    Q1 = df[column].quantile(0.25)
+    Q3 = df[column].quantile(0.75)
+    IQR = Q3 - Q1
+    lower_bound = Q1 - 1.5 * IQR
+    upper_bound = Q3 + 1.5 * IQR
+    
+    outliers = df[(df[column] < lower_bound) | (df[column] > upper_bound)]
+    return outliers
+
+# Check outliers for each numerical column
+for col in numerical_cols:
+    outliers = detect_outliers(df, col)
+    print(f"Outliers in {col}: {len(outliers)}")
+
+```
+The above code revealed **no extreme outliers** in the key numerical fields, which indicates that the dataset did not contain unusual or extreme values that could distort results.
