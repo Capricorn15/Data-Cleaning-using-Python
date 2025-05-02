@@ -183,3 +183,15 @@ print(f"Duplicate customer records found: {len(duplicates)}")
 # Remove irrelevant column
 df.drop("default", axis=1, inplace=True)
 ```
+
+## Final Cleaned Dataset
+After cleaning, the dataset is ready for analysis. The cleaned dataset was saved for future use:
+
+```
+# Save cleaned dataset 
+df_cleaned = df
+df_cleaned.to_excel("cleaned_data.xlsx", index=False)
+```
+
+## Conclusion
+This project demonstrates how data cleaning improve data quality for better decision-making. The cleaned dataset is now ready for advanced analysis  which includes; customer segmentation, trend analysis, or predictive modeling.
